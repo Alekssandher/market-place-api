@@ -1,6 +1,7 @@
 import { User } from "modules/users/entities/User";
 import { IUserRepositories } from "../IUserRepositories";
 import UserSchemma from "modules/users/schemas/UserSchemma";
+import { Address } from "modules/users/entities/Address";
 
 export class UserRepositoryMongoDb implements IUserRepositories {
     
@@ -27,5 +28,22 @@ export class UserRepositoryMongoDb implements IUserRepositories {
 
     async update(id: string, body: User): Promise<void> {
         await UserSchemma.findByIdAndUpdate(id, body);
+    }
+
+    async delete(id: string): Promise<void> {
+        await UserSchemma.findByIdAndDelete(id);
+    }
+
+    async addNewAddress(userId: string, address: Address): Promise<void> {
+        await UserSchemma.findOneAndUpdate( 
+            {
+                _id: userId,
+            },
+            {
+                $push: {
+                    addresses: address,
+                },
+            }
+        )
     }
 }

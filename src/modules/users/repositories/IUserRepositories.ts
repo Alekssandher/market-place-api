@@ -1,3 +1,4 @@
+import { Address } from "../entities/Address";
 import { User } from "../entities/User";
 
 export interface IUserRepositories {
@@ -6,4 +7,6 @@ export interface IUserRepositories {
     findAll(limit: number, offset: number): Promise<User[]>;
     findById(id: string): Promise<User | null>;
     update(id: string, body: User): Promise<void>;
+    delete(id: string): Promise<void>;
+    addNewAddress(userId: string, address: Address): Promise<void>;
 }   

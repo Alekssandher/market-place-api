@@ -4,6 +4,7 @@ import UserSchemma from "modules/users/schemas/UserSchemma";
 
 export class UserRepositoryMongoDb implements IUserRepositories {
     
+    
     async create(body: User): Promise<void> {
         await UserSchemma.create(body);
     }
@@ -22,5 +23,9 @@ export class UserRepositoryMongoDb implements IUserRepositories {
     async findById(id: string): Promise<User | null> { 
         const user = await UserSchemma.findById(id).select(["-password", "-__v"]);
         return user;
+    }
+
+    async update(id: string, body: User): Promise<void> {
+        await UserSchemma.findByIdAndUpdate(id, body);
     }
 }

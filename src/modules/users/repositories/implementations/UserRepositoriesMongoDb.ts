@@ -46,4 +46,39 @@ export class UserRepositoryMongoDb implements IUserRepositories {
             }
         )
     }
+    async findAddressByID(userId: string, addressId: string): Promise<Address | null> {
+        return await UserSchemma.findOne(
+            {_id: userId, "addresses._id": addressId}, 
+            {"addresses.$": 1}
+        );
+    }
+    async removeAddress(userId: string, addressId: string ): Promise<void> {
+        await UserSchemma.findOneAndUpdate( 
+            {
+                _id: userId,
+            },
+            {
+                $pull: {
+                    addresses: {
+                        _id: addressId
+                    }
+                },
+            }
+        )
+    }
+
+    async addFavoriteProduct(userId: string, productId: string): Promise<void> {
+        await UserSchemma.findOneAndUpdate( 
+            {
+                _id: userId,
+            },
+            {
+                $push: {
+                    favoriteProducts: {
+                        _id: productId
+                    }
+                },
+            }
+        )
+    }
 }

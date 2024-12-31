@@ -1,7 +1,7 @@
 import { User } from "modules/users/entities/User";
 import { IAuthRepositories } from "../IAuthRepositories";
 import { ObjectId } from "mongodb";
-import UserSchemma from "modules/users/schemas/UserSchemma";
+import UserSchemma from "modules/users/schemas/UserSchema";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 

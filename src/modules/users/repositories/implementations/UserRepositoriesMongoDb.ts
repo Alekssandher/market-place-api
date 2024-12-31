@@ -1,6 +1,6 @@
 import { User } from "modules/users/entities/User";
 import { IUserRepositories } from "../IUserRepositories";
-import UserSchemma from "modules/users/schemas/UserSchemma";
+import UserSchemma from "modules/users/schemas/UserSchema";
 import { Address } from "modules/users/entities/Address";
 import { Product } from "modules/products/entities/Product";
 
